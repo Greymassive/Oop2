@@ -1,8 +1,19 @@
 package ru.javamv;
 
 public class Radio {
+    private int stationCount;
+    private int maxVolume = 100;
+    private int minVolume = 0;
     private int currentVolume;
     private int currentStation;
+
+    public Radio(int size) {
+        stationCount = stationCount + size;
+    }
+
+    public Radio() {
+        stationCount = 10;
+    }
 
     public int getCurrentStation() {
         return currentStation;
@@ -12,18 +23,8 @@ public class Radio {
         return currentVolume;
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (currentVolume > 100) {
-            return;
-        }
-        if (currentVolume < 0) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
-    }
-
     public void nextStation() {
-        if (currentStation >= 9) {
+        if (currentStation >= stationCount - 1) {
             currentStation = 0;
         } else {
             currentStation++;
@@ -39,7 +40,7 @@ public class Radio {
     }
 
     public void setStation(int newStation) {
-        if (newStation > 9) {
+        if (newStation > stationCount - 1) {
             return;
         }
         if (newStation < 0) {
@@ -48,14 +49,24 @@ public class Radio {
         currentStation = newStation;
     }
 
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
+    }
+
     public void increaseVolume() {
-        if (currentVolume < 100) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
         }
     }
