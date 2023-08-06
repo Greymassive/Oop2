@@ -1,8 +1,8 @@
 package ru.javamv;
 
 public class Radio {
-    public int currentVolume;
-    public int currentStation;
+    private int currentVolume;
+    private int currentStation;
 
     public int getCurrentStation() {
         return currentStation;
@@ -10,6 +10,16 @@ public class Radio {
 
     public int getCurrentVolume() {
         return currentVolume;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (currentVolume > 100) {
+            return;
+        }
+        if (currentVolume < 0) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
     }
 
     public void nextStation() {
